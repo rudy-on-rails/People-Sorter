@@ -1,0 +1,73 @@
+<form action="sort_people" method="post">
+  <legend>Start typing people names bellow</legend>
+  <label>People Name</label>
+  <input type="text" id="people_name" placeholder="Type name here…" class="input-xlarge">
+  <a class="btn btn-small" href="javascript:" id="add_person"><i class="icon-plus-sign"></i></a>
+  <br>
+  <label>Group people number</label>
+  <input type="number" name="group_number" placeholder="Number of people on each group..." class="input-xlarge">
+  <br>
+  <button type="submit" class="btn">Sort People</button>
+  <table class="table" style="display: none">
+    <thead>
+      <th>Nome</th>
+      <th>#</th>
+    </thead>
+    <tbody id="people_list"></tbody>
+  </table>
+  <br>
+</form>
+
+<script language="javascript">
+  PersonHandler = function(){
+    var getCurrentName = function(){
+      return $('#people_name').val();
+    }
+
+    var getPeopleCount = function(){
+      return $('tr').size();
+    }
+
+    var addPersonToList = function(){
+      var personName = getCurrentName();
+      if (personName && personName != undefined){
+        var count = getPeopleCount();
+        var removeLink = '<a href="javascript:" class="btn btn-small btn-danger remove_person">Delete</a>';
+        var inputHiddenHtml = '<input type="hidden" name="people['+ count +']" value="' + personName +'"></input>';
+        var htmlElement = '<tr><td>' + personName + inputHiddenHtml + '<td>' + removeLink + '<td></tr>'
+        $('#people_list').append(htmlElement);
+      }
+      checkTableVisibility();
+    }
+
+    var checkTableVisibility = function(){
+      if (getPeopleCount() > 0)
+        $('table').show('fast');
+      else
+        $('table').hide('fast');
+    }
+
+    var removeFromList = function(){
+      $(this).parents('tr').remove();
+      checkTableVisibility();
+    }
+
+    this.bindHandlingEvents = function(){
+      $('#add_person').bind('click', addPersonToList);
+      $('.remove_person').live('click', removeFromList);      
+      $('#people_name').keypress(function(event) {
+          if (event.which == 13) {
+              event.preventDefault();
+              addPersonToList();
+              $(this).val("");
+          }
+      });
+    }
+
+  }
+  
+  $(function() {
+    new PersonHandler().bindHandlingEvents();
+    $('#people_name').focus();
+  });
+</script>

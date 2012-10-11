@@ -1,0 +1,19 @@
+<% @result_groups.each_with_index do |group, idx|  %>
+  <h4>Group <%= idx + 1 %></h4>
+  <table class="table"> 
+      <thead>
+        <tr>
+          <th>Name</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% group.each do |person| %>
+          <tr>
+            <td><%= person %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>  
+<% end %>
+
+<a href="/" class="btn">Back</a>
