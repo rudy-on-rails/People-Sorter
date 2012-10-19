@@ -6,7 +6,7 @@ describe PeopleSorter, 'Sorts people array into new arrays with desired size' do
   let(:people){["Satriani","Hendrix","Steve Vai","Malmsteen", "Petrucci", "Dimebag Darrell"]}
 
   context "#sort_in_groups_of" do
-    it "should return one array with all people case number passed is equal to the number of people" do
+    it "should return one array for each one case number passed is equal to the number of people" do
       instance = described_class.new(people)
       result = instance.sort_in_groups_of(6)
       result.count.should eq(1)
@@ -15,7 +15,7 @@ describe PeopleSorter, 'Sorts people array into new arrays with desired size' do
       end
     end
 
-    it "should return two arrays with 3 people each case number passed 3" do
+    it "should return two arrays with 3 people each case number passed is 3" do
       instance = described_class.new(people)
       result = instance.sort_in_groups_of(3)
       result.count.should eq(2)
@@ -24,7 +24,7 @@ describe PeopleSorter, 'Sorts people array into new arrays with desired size' do
       end
     end
 
-    it "should return three arrays with 2 people each case number passed 2" do
+    it "should return three arrays with 2 people each case number passed is 2" do
       instance = described_class.new(people)
       result = instance.sort_in_groups_of(2)
       result.count.should eq(3)
@@ -33,7 +33,7 @@ describe PeopleSorter, 'Sorts people array into new arrays with desired size' do
       end
     end
 
-    it "should return an smaller array at last case number is indivisible" do
+    it "should return an smaller array with the ramainder at last case nbr is indivisible" do
       instance = described_class.new(people)
       result = instance.sort_in_groups_of(4)
       result.count.should eq(2)
